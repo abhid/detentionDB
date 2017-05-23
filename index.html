@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="detentionDB">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="students.js"></script>
+    <link rel="stylesheet" type="text/css" href="default.css">
+  </head>
+  <body>
+    <div ng-controller="studentsController as students">
+      <h3 class="title">detention database system</h3>
+      <table>
+        <tr ng-repeat="student in students.list">
+          <td>{{student.name}}</td>
+          <td>{{student.question}}</td>
+        </tr>
+      </table>
+      <div style="margin-top: 25px;">
+        <form ng-submit="students.delete()">
+          <input id="deleteKey" type="text" ng-model="students.deleteKey" autofocus="true" autocomplete="off"/>
+          <input id="deleteBtn" class="btn" type="submit" value="Delete" style="vertical-align: top;"/>
+          <span>{{students.status}}</span>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+body {
+  background: black;
+  color: white;
+  font-family: "Courier New", "Consolas", monospace;
+}
+
+table {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+table td{
+  border: 1px solid white;
+  padding: 5px 25px;
+}
+
+#deleteKey {
+  border: none;
+  background: #0f0f0f;
+  color: white;
+  font-family: "Consolas", monospace;
+  font-size: 28px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.btn {
+  font-family: "Courier New", "Consolas", monospace;
+  color: #000000;
+  font-size: 20px;
+  background: #7fa4bd;
+  padding: 5px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #5f9fc7;
+  text-decoration: none;
+}
