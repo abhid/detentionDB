@@ -108,19 +108,18 @@ angular.module('detentionDB', [])
        name: 'Zenith Zippy'}
     ];
     students.remaining = ['ff', 'tt', 'dd', 'ii', 'ss', 'jj'];
-    // You can win this if you read the source code. GOOD LUCK.
-    students.delete = function() {
-      if (students.deleteKey == "cheat2win") {
-        students.status = "ALL RECORDS FOR GRADUATING SENIORS HAVE BEEN CLEARED. CONGRATULATIONS."
-        students.deleteKey = '';
-        return
-      }
+
+    students.randomize = function() {
+      students.list = _.shuffle(students.list);
+    }
+
+    students.delete = function(id) {
       // Randomize
       students.list = _.shuffle(students.list);
 
       // Find the student who's key was entered
       var record = _.find(students.list, function(student) {
-        if (student.key == students.deleteKey) {
+        if (student.id == id) {
           return student;
         }
         else {
@@ -128,32 +127,30 @@ angular.module('detentionDB', [])
         }
       });
 
-      // Invalid key exit now
-      if (!record) {
-        students.status = "Invalid key"
+      var key = window.prompt("Enter key to delete " + record.name)
+
+      if (record.key != key) {
+        swal("Oops...", record.name + "'s detention file could not be deleted", "error")
+        return
+      }
+
+      // Check if record is the right one
+      if (record.id == students.remaining[0]) {
+        var filtered_list = _.reject(students.list, function(student) {
+          if (student == record) {
+            return student
+          }
+        });
+        students.list = filtered_list;
+        students.remaining.shift();
+        swal("Yay...", record.name + "'s detention file has been successfully deleted", "success");
       }
       else {
-        // Check if record is the right one
-        if (record.id == students.remaining[0]) {
-          var filtered_list = _.reject(students.list, function(student) {
-            if (student == record) {
-              return student
-            }
-          });
-          students.list = filtered_list;
-          students.remaining.shift();
-          students.status = record.name + "'s detention file has been successfully deleted";
-        }
-        else {
-          students.status = record.name + "'s detention file could not be deleted";
-        }
+        swal("Oops...", record.name + "'s detention file could not be deleted", "error");
       }
 
       if (students.remaining.length == 0) {
-        students.status += ". CONGRATULATIONS. ALL RECORDS FOR GRADUATING SENIORS HAVE BEEN DELETED.";
+        swal("CONGRATULATIONS", "ALL RECORDS FOR GRADUATING SENIORS HAVE BEEN DELETED.", "success");
       }
-
-      // Clear the textfield
-      students.deleteKey = '';
     }
   });

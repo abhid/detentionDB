@@ -3,25 +3,27 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
     <script src="students.js"></script>
     <link rel="stylesheet" type="text/css" href="default.css">
   </head>
   <body>
-    <div ng-controller="studentsController as students">
+    <div ng-controller="studentsController as students" ng-init="students.randomize();">
       <h3 class="title">detention database system</h3>
+      <div class="instructions" style="margin-bottom: 25px;">Due to recent abuses and hacking attempts, all attempts to delete names<br />from the database must now be performed in descending order.<br />Thank you,<br />Management</div>
       <table>
         <tr ng-repeat="student in students.list">
-          <td>{{student.name}}</td>
-          <td>{{student.question}}</td>
+          <td ng-click="students.delete(student.id)">{{student.name}}</td>
         </tr>
       </table>
-      <div style="margin-top: 25px;">
+      <!-- <div style="margin-top: 25px;">
         <form ng-submit="students.delete()">
           <input id="deleteKey" type="text" ng-model="students.deleteKey" autofocus="true" autocomplete="off"/>
           <input id="deleteBtn" class="btn" type="submit" value="Delete" style="vertical-align: top;"/>
           <span>{{students.status}}</span>
         </form>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>
