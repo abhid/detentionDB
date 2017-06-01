@@ -11,7 +11,7 @@
   <body>
     <div ng-controller="studentsController as students" ng-init="students.randomize();">
       <h3 class="title">detention database system</h3>
-      <div class="instructions" style="margin-bottom: 25px;">Due to recent abuses and hacking attempts, all names must be deleted<br />from the database from greatest hours to least hours of detention over the last year.<br />Your name must currently be in detention to be deleted.<br />Thank you,<br />Management</div>
+      <div class="instructions" style="margin-bottom: 25px;">Due to recent abuses and hacking attempts, all names must be deleted<br />from the database from greatest hours to least hours of detention over the last year (remember they need to be in detention the last two weeks of the year).<br />Your name must currently be in detention to be deleted.<br />Thank you,<br />Management</div>
       <table>
         <tr ng-repeat="student in students.list">
           <td ng-click="students.delete(student.id)">{{student.name}}</td>
